@@ -18,7 +18,6 @@ set background=dark
 highlight clear SignColumn
 set backspace=2 " make backspace work like most other apps
 
-
 set smartindent
 set tabstop=2
 set shiftwidth=2
@@ -30,9 +29,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'Lokaltog/vim-powerline'
+""Plugin 'vim-airline/vim-airline'
 " Plugin 'Solarized'
-Plugin 'fugitive.vim'
 Plugin 'Conque-Shell'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'FuzzyFinder'
 Plugin 'L9'
 Plugin 'The-NERD-tree'
@@ -48,6 +49,10 @@ Plugin 'slim-template/vim-slim.git'
 Plugin 'mileszs/ack.vim'
 Plugin 'RltvNmbr.vim'
 Plugin 'Valloric/YouCompleteMe.git'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'bling/vim-bufferline'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -70,7 +75,6 @@ set backupdir=~/.backup,.,/tmp
 set noswapfile
 autocmd BufWritePre * :%s/\s\+$//e
 
-
 let g:browser = '/usr/bin/open -a "/Applications/Google Chrome.app" '
 " Open the Ruby ApiDock page for the word under cursor, in a new Firefox tab
 function! OpenRubyDoc(keyword)
@@ -80,10 +84,10 @@ endfunction
 noremap RB :call OpenRubyDoc(expand('<cword>'))<CR>
 
 "let g:nerdtree_tabs_open_on_console_startup=0
-set guifont=Menlo\ Regular:h16
+"set guifont=Menlo\ Regular:h16
+""set guifont=Source\ Code\ Pro\ for\ Powerline:h16
 
 com Cdg cd ~/code/bigbinary/gumroad/web
-
 
 let g:NERDTreeHijackNetrw = 1
 au VimEnter NERD_tree_1 enew | execute 'NERDTree '.argv()[0]
@@ -97,3 +101,17 @@ imap jj <Esc>
 noremap <Leader>b :Ack <cword><cr>
 nmap ,n :NERDTreeFind<CR>
 nmap ,m :NERDTreeToggle<CR>
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Trim trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
+set encoding=utf-8
+set guifont=Roboto\ Mono\ for\ Powerline:h18
+let g:Powerline_symbols = 'fancy'
+
+set rtp+=/usr/local/opt/fzf
+
+inoremap {<cr> {<cr>}<c-o><s-o>
+inoremap [<cr> [<cr>]<c-o><s-o>
+inoremap (<cr> (<cr>)<c-o><s-o>
